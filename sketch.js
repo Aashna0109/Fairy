@@ -1,6 +1,7 @@
 var starImg,bgImg;
 var star, starBody;
 var fairy,fairyImg
+var sound
 
 const Engine = Matter.Engine;
 const World = Matter.World;
@@ -12,6 +13,7 @@ function preload()
 	starImg = loadImage("images/star.png");
 	bgImg = loadImage("images/starNight.png");
 	fairyImg = loadAnimation("images/fairyImage1.png","images/fairyImage2.png")
+	sound = loadSound("sound/Joy.mp3")
 }
 
 function setup() {
@@ -39,7 +41,7 @@ function draw() {
   background(bgImg);
 
   Engine.update(engine)
-
+  sound.play();
   star.x= starBody.position.x 
   star.y= starBody.position.y 
 
@@ -58,6 +60,7 @@ function draw() {
 
   if(star.isTouching(fairy)){
 	Matter.Body.setStatic(starBody,true)
+	sound.stop();
   }
   fairy.setCollider("circle",480,0,80)
 
